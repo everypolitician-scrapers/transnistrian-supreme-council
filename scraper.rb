@@ -28,8 +28,9 @@ def scrape_list(url)
       name: person.css('.title').text.tidy,
       area: person.text[/округ № (\d+)/, 1],
       image: person.css('a img/@src').text,
-      term: 5,
+      term: 6,
       source: source,
+      last_seen: Date.today.to_s,
     }
     %i(source image).each { |i| data[i] = URI.join(url, data[i]).to_s unless data[i].to_s.empty? }
     ScraperWiki.save_sqlite([:id, :term], data)
