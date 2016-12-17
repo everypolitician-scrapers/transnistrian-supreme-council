@@ -30,7 +30,6 @@ def scrape_list(url)
       image: person.css('a img/@src').text,
       term: 6,
       source: source,
-      last_seen: Date.today.to_s,
     }
     %i(source image).each { |i| data[i] = URI.join(url, data[i]).to_s unless data[i].to_s.empty? }
     ScraperWiki.save_sqlite([:id, :term], data)
